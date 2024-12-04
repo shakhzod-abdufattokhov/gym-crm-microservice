@@ -36,7 +36,7 @@ class TrainingControllerTest {
         TrainingRequest request = new TrainingRequest(1L, 1L, "Bodybuilding", 1L, LocalDate.now(), Duration.ofHours(2));
         ApiResponse<Void> apiResponse = new ApiResponse<>(200, "Training created successfully!", true);
 
-        ApiResponse<Void> response = trainingController.create(request);
+        ApiResponse<Void> response = trainingController.create(request, "");
 
         assertEquals(200, response.statusCode());
         assertEquals("Training created successfully!", response.message());
