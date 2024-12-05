@@ -38,7 +38,8 @@ public class TrainingTypeController {
     public ApiResponse<Boolean> isDatabaseEmpty() {
         log.info("Checking if the training type database is empty");
         boolean isEmpty = trainingTypeService.isDBEmpty();
-        return new ApiResponse<>(200, true, isEmpty, isEmpty ? "Database is empty" : "Database is not empty");
+        return new ApiResponse<>(200, true, isEmpty, isEmpty ? "Database is empty" : "Database " +
+                                                                                                        "is not empty");
     }
 }
 

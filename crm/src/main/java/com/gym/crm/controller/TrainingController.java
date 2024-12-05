@@ -22,7 +22,8 @@ public class TrainingController implements TrainingControllerDocumentation {
     private final TrainingService trainingService;
 
     @PostMapping
-    public ApiResponse<Void> create(@Valid @RequestBody TrainingRequest request, @RequestHeader("Authorization") String authorization) {
+    public ApiResponse<Void> create(@Valid @RequestBody TrainingRequest request,
+                                    @RequestHeader("Authorization") String authorization) {
         log.info("Creating training: {}", request);
         trainingService.create(request, authorization);
         log.info("Created training: {}", request);

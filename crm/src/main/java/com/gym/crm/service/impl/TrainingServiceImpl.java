@@ -52,7 +52,8 @@ public class TrainingServiceImpl implements TrainingService {
                 .orElseThrow(() -> new CustomNotFoundException("Trainee not found with id: %d".formatted(traineeId)));
 
         TrainingType trainingType = trainingTypeRepository.findById(trainingRequest.trainingTypeId())
-                .orElseThrow(() -> new CustomNotFoundException("TrainingType with id : %d not found".formatted(trainingRequest.trainingTypeId())));
+                .orElseThrow(() -> new CustomNotFoundException("TrainingType with id : %d not found".formatted(
+                        trainingRequest.trainingTypeId())));
 
         Training training = trainingMapper.toEntity(trainingRequest);
 
@@ -86,7 +87,8 @@ public class TrainingServiceImpl implements TrainingService {
                 .orElseThrow(() -> new CustomNotFoundException("Trainee not found with id: %d".formatted(traineeId)));
 
         TrainingType trainingType = trainingTypeRepository.findById(trainingRequest.trainingTypeId())
-                .orElseThrow(() -> new CustomNotFoundException("TrainingType with id : %d not found".formatted(trainingRequest.trainingTypeId())));
+                .orElseThrow(() -> new CustomNotFoundException("TrainingType with id : %d not found".formatted(
+                        trainingRequest.trainingTypeId())));
 
         Training training = trainingMapper.toEntity(trainingRequest);
 
@@ -104,14 +106,14 @@ public class TrainingServiceImpl implements TrainingService {
         log.info("Training created successfully with ID: {}", training.getId());
 
         workloadClient.processWorkload(new TrainerWorkload(
-                trainer.getUsername(),
-                trainer.getFirstName(),
-                trainer.getLastName(),
-                trainer.getIsActive(),
-                trainingRequest.trainingDate(),
-                (double) trainingRequest.duration().toMinutes() / 60.0,
-                ActionType.ADD
-            ), authorization
+                        trainer.getUsername(),
+                        trainer.getFirstName(),
+                        trainer.getLastName(),
+                        trainer.getIsActive(),
+                        trainingRequest.trainingDate(),
+                        (double) trainingRequest.duration().toMinutes(),
+                        ActionType.ADD
+                ), authorization
         );
     }
 
@@ -141,19 +143,31 @@ public class TrainingServiceImpl implements TrainingService {
     }
 
     @Override
-    public List<TrainingResponse> findTraineeTrainings(String username, LocalDate fromDate, LocalDate toDate, String trainerUserName, Long trainingTypeId) {
+    public List<TrainingResponse> findTraineeTrainings(String username,
+                                                       LocalDate fromDate,
+                                                       LocalDate toDate,
+                                                       String trainerUserName,
+                                                       Long trainingTypeId) {
+
         log.debug("Finding trainee trainings for username: {}", username);
-        List<Training> trainings = trainingRepository.findAllByCriteria(username, fromDate, toDate, trainerUserName, trainingTypeId);
+        List<Training> trainings = trainingRepository.findAllByCriteria(
+                username, fromDate, toDate, trainerUserName, trainingTypeId
+        );
         if (trainings.isEmpty()) {
-           throw  new CustomNotFoundException("No training found!");
+            throw new CustomNotFoundException("No training found!");
         }
         return trainingMapper.toResponses(trainings);
     }
 
     @Override
-    public List<TrainingResponse> getTrainingsByTrainer(String username, LocalDate fromDate, LocalDate toDate, String traineeName) {
+    public List<TrainingResponse> getTrainingsByTrainer(String username,
+                                                        LocalDate fromDate,
+                                                        LocalDate toDate,
+                                                        String traineeName) {
         log.debug("Finding trainings by trainer: {}", username);
-        List<Training> trainings = trainingRepository.findAllByTrainerAndCategory(username, fromDate, toDate, traineeName);
+        List<Training> trainings = trainingRepository.findAllByTrainerAndCategory(
+                username, fromDate, toDate, traineeName
+        );
         return trainingMapper.toResponses(trainings);
     }
 

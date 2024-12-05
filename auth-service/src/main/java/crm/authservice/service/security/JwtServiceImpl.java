@@ -35,7 +35,8 @@ public class JwtServiceImpl implements JwtService {
     }
 
     private SecretKey getSignKey() {
-        String SECRET_KEY = "eyJhbGciOiJIUzUxMiJ9eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCIMTcaqNDQ2ODA4MCwiaWF0IjoxNzA0NDY4MDgwfQLtk5Easw";
+        String SECRET_KEY = "eyJhbGciOiJIUzUxMiJ9eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmF" +
+                "JblVzZSIsImV4cCIMTcaqNDQ2ODA4MCwiaWF0IjoxNzA0NDY4MDgwfQLtk5Easw";
         byte[] key = Decoders.BASE64.decode(SECRET_KEY);
         return Keys.hmacShaKeyFor(key);
     }

@@ -40,7 +40,9 @@ public class TrainerServiceImpl implements TrainerService {
         Trainer trainer = trainerMapper.toTrainer(trainerRequest);
         trainer.setPassword(PasswordGenerator.generatePassword());
         TrainingType trainingType = trainingTypeRepository.findById(trainerRequest.specializationId())
-                .orElseThrow(() -> new CustomNotFoundException("TrainingType with id : %d not found".formatted(trainerRequest.specializationId())));
+                .orElseThrow(() -> new CustomNotFoundException("TrainingType with id : %d not found".formatted(
+                        trainerRequest.specializationId()))
+                );
 
         trainer.setSpecialization(trainingType);
         if (trainerRepository.existsTrainerByUsername(trainer.getUsername())) {
@@ -64,7 +66,9 @@ public class TrainerServiceImpl implements TrainerService {
 
         Trainer updated = trainerMapper.toUpdatedTrainer(trainer, trainerRequest);
         TrainingType trainingType = trainingTypeRepository.findById(trainerRequest.specializationId())
-                .orElseThrow(() -> new CustomNotFoundException("TrainingType with id : %d not found".formatted(trainerRequest.specializationId())));
+                .orElseThrow(() -> new CustomNotFoundException("TrainingType with id : %d not found".formatted(
+                        trainerRequest.specializationId()))
+                );
 
         updated.setSpecialization(trainingType);
         trainerRepository.save(updated);

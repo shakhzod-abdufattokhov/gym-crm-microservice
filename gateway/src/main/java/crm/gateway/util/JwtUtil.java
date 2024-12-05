@@ -11,7 +11,8 @@ import java.security.Key;
 public class JwtUtil {
 
 
-    public static final String SECRET = "eyJhbGciOiJIUzUxMiJ9eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCIMTcaqNDQ2ODA4MCwiaWF0IjoxNzA0NDY4MDgwfQLtk5Easw";
+    public static final String SECRET = "eyJhbGciOiJIUzUxMiJ9eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmF" +
+            "                               tZSI6IkphdmFJblVzZSIsImV4cCIMTcaqNDQ2ODA4MCwiaWF0IjoxNzA0NDY4MDgwfQLtk5Easw";
 
 
     public void validateToken(final String token) {

@@ -25,7 +25,7 @@ public class AuthController {
     private final CustomUserDetailsService customUserDetailsService;
 
     @PostMapping("/register")
-    public ResponseEntity<RegistrationResponse> register(@Valid @RequestBody RegisterRequest request) throws IOException {
+    public ResponseEntity<RegistrationResponse> register(@Valid @RequestBody RegisterRequest request) throws IOException{
         return ResponseEntity.ok(authService.register(request));
     }
 

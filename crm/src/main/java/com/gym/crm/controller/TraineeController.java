@@ -77,8 +77,10 @@ public class TraineeController implements TraineeControllerDocumentation {
                                                                    @RequestParam(required = false) LocalDate toDate,
                                                                    @RequestParam(required = false) String trainerUsername,
                                                                    @RequestParam(required = false) Long trainingTypeId) {
-        log.info("Finding trainings for trainee {} from {} to {} with name {} and type {}", username, fromDate, toDate, trainerUsername, trainingTypeId);
-        List<TrainingResponse> responses = trainingService.findTraineeTrainings(username, fromDate, toDate, trainerUsername, trainingTypeId);
+        log.info("Finding trainings for trainee {} from {} to {} with name {} and type {}",
+                username, fromDate, toDate, trainerUsername, trainingTypeId);
+        List<TrainingResponse> responses = trainingService.findTraineeTrainings(username, fromDate,
+                                                                                toDate, trainerUsername, trainingTypeId);
         return new ApiResponse<>(200, true, responses, "Successfully found!");
     }
 

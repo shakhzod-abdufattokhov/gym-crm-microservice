@@ -29,7 +29,8 @@ public class TrainingTypeServiceImpl implements TrainingTypeService {
     public void createTrainingType(TrainingTypeRequest trainingTypeRequest) {
         Optional<TrainingType> byName = trainingTypeRepository.findByName(trainingTypeRequest.name());
         if(byName.isPresent()) {
-            throw new CustomAlreadyExistException("Training Type is already exist with this name: "+ trainingTypeRequest.name());
+            throw new CustomAlreadyExistException("Training Type is already exist with this name: "+
+                    trainingTypeRequest.name());
         }
         trainingTypeRepository.save(new TrainingType(trainingTypeRequest.name()));
     }

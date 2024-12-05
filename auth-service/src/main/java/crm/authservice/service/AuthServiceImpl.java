@@ -43,7 +43,9 @@ public class AuthServiceImpl implements AuthService{
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginDto.username(), loginDto.password()));
         AuthUser user = userRepository.findByUsername(loginDto.username())
-                .orElseThrow(() -> new EntityNotFoundException("User with username : %s not found".formatted(loginDto.username())));
+                .orElseThrow(() -> new EntityNotFoundException("User with username : %s not found".formatted(
+                        loginDto.username()))
+                );
         return jwtService.generateToken(user);
     }
 
