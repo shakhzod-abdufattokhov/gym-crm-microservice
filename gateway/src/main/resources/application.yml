@@ -21,9 +21,18 @@ spring:
           uri: http://localhost:8090
           predicates:
             - Path=/api/v1/trainee/**
+          filters:
+            - AuthenticationFilter
+
+
+        - id: crm-trainee
+          uri: http://localhost:8090
+          predicates:
             - Path=/api/v1/trainer/**
           filters:
             - AuthenticationFilter
+
+
 
         - id: crm-training
           uri: http://localhost:8090

@@ -25,18 +25,18 @@ public class AuthController implements AuthControllerDocumentation {
     @PostMapping("/register-trainee")
     public ApiResponse<RegistrationResponse> register(@RequestBody @Valid TraineeRequest dto) throws IOException {
         log.info("Registering trainee with the request : {}", dto);
-        RegistrationResponse registrationResponse = authService.register(dto);
+        RegistrationResponse registrationResponse = authService.registerTrainee(dto);
         return new ApiResponse<>(201, true, registrationResponse, "Saved successfully!");
     }
 
     @PostMapping("/register-trainer")
     public ApiResponse<RegistrationResponse> register(@RequestBody @Valid TrainerRequest dto) throws IOException {
         log.info("Registering trainer with the request : {}", dto);
-        RegistrationResponse registrationResponse = authService.register(dto);
+        RegistrationResponse registrationResponse = authService.registerTrainer(dto);
         return new ApiResponse<>(201, true,   registrationResponse, "Saved successfully!");
     }
 
-    @GetMapping("/login")
+    @PostMapping("/login")
     public ApiResponse<String> login(@Valid @RequestBody UserLoginRequest dto) {
         log.info("Logging in with username : {}", dto.username());
         String login = authService.login(dto);

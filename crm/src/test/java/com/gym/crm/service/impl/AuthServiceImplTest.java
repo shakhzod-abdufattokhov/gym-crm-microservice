@@ -48,7 +48,7 @@ class AuthServiceImplTest {
 
         when(traineeService.create(request)).thenReturn(expectedResponse);
 
-        RegistrationResponse actualResponse = authService.register(request);
+        RegistrationResponse actualResponse = authService.registerTrainee(request);
 
         assertEquals(expectedResponse, actualResponse);
         verify(traineeService, times(1)).create(request);
@@ -67,7 +67,7 @@ class AuthServiceImplTest {
 
         when(trainerService.create(request)).thenReturn(expectedResponse);
 
-        RegistrationResponse actualResponse = authService.register(request);
+        RegistrationResponse actualResponse = authService.registerTrainer(request);
 
         assertEquals(expectedResponse, actualResponse);
         verify(trainerService, times(1)).create(request);

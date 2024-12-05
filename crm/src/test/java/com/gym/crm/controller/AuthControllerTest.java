@@ -34,13 +34,13 @@ class AuthControllerTest {
     void registerTrainee() throws IOException {
         TraineeRequest traineeRequest = new TraineeRequest("Iman", "Gadzhi", LocalDate.of(2000, 1, 1), "USA", true);
         RegistrationResponse registrationResponse = new RegistrationResponse("Iman.Gadzhi", "qwerty");
-        when(authService.register(traineeRequest)).thenReturn(registrationResponse);
+        when(authService.registerTrainee(traineeRequest)).thenReturn(registrationResponse);
 
         ApiResponse<RegistrationResponse> response = authController.register(traineeRequest);
 
         assertEquals(201, response.statusCode());
         assertEquals("Saved successfully!", response.message());
-        verify(authService, times(1)).register(traineeRequest);
+        verify(authService, times(1)).registerTrainee(traineeRequest);
         verifyNoMoreInteractions(authService);
     }
 
@@ -49,13 +49,13 @@ class AuthControllerTest {
         TrainerRequest trainerRequest = new TrainerRequest("John", "Doe", 1L, true);
         RegistrationResponse registrationResponse = new RegistrationResponse("John.Doe", "qwerty");
 
-        when(authService.register(trainerRequest)).thenReturn(registrationResponse);
+        when(authService.registerTrainer(trainerRequest)).thenReturn(registrationResponse);
 
         ApiResponse<RegistrationResponse> response = authController.register(trainerRequest);
 
         assertEquals(201, response.statusCode());
         assertEquals("Saved successfully!", response.message());
-        verify(authService, times(1)).register(trainerRequest);
+        verify(authService, times(1)).registerTrainer(trainerRequest);
         verifyNoMoreInteractions(authService);
     }
 

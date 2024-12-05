@@ -1,5 +1,6 @@
 package com.gym.crm.exception.handler;
 
+import com.gym.crm.exception.CustomAlreadyExistException;
 import com.gym.crm.exception.CustomNotFoundException;
 import com.gym.crm.model.dto.response.ErrorResponse;
 import jakarta.persistence.NoResultException;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -63,6 +65,7 @@ public class CustomExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleException(Exception ex, WebRequest request) {
+        System.out.println(Arrays.toString(ex.getStackTrace()));
         ErrorResponse errorResponse = new ErrorResponse(
                 HttpStatus.INTERNAL_SERVER_ERROR.value(),
                 "Internal Server Error",
@@ -70,5 +73,16 @@ public class CustomExceptionHandler {
                 request.getContextPath()
         );
         return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(CustomAlreadyExistException.class)
+    public ResponseEntity<ErrorResponse> handleAlreadyExistException(CustomAlreadyExistException ex, WebRequest request) {
+        ErrorResponse badRequest = new ErrorResponse(
+                HttpStatus.BAD_REQUEST.value(),
+                "Bad Request",
+                ex.getMessage(),
+                request.getContextPath()
+        );
+        return new ResponseEntity<>(badRequest, HttpStatus.BAD_REQUEST);
     }
 }

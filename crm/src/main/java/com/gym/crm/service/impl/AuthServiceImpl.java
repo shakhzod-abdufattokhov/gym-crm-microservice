@@ -28,12 +28,12 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public RegistrationResponse register(TraineeRequest registerDto) throws IOException {
+    public RegistrationResponse registerTrainee(TraineeRequest registerDto) throws IOException {
         return traineeService.create(registerDto);
     }
 
     @Override
-    public RegistrationResponse register(TrainerRequest registerDto) throws IOException {
+    public RegistrationResponse registerTrainer(TrainerRequest registerDto) throws IOException {
         return trainerService.create(registerDto);
     }
 
